@@ -9,4 +9,16 @@ class Technician extends Model
 {
     use HasFactory;
     protected $table = 'technician';
+
+    protected $fillable = [
+        'document',
+        'name',
+        'specialty',
+        'phone',
+    ];
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }
