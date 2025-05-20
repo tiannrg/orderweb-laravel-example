@@ -1,15 +1,18 @@
 @extends('templates.base')
-@section('title', 'Crear Causal')
-@section('header', 'Crear Causal')
+@section('title', 'Editar Causal')
+@section('header', 'Editar Causal')
 @section('content')
     <div class = "row">
         <div class="col-lg-12 mb-4">
-            <form action="{{ route('causal.store') }}" method="POST">
+            <form action="{{ route('causal.update', $causal['id']) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row form-group">
                     <div class="col-lg-12 mb-4">
                         <label for="description">Descripcion</label>
-                        <input type="text" class="form-control" name="description" id="description" required>
+                        <input type="text" class="form-control" name="description" id="description" required
+                         value="{{ $causal['description']}}">>
+                        
                     </div>  
                 </div>
                 <div class="row">
