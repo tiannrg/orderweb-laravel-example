@@ -4,7 +4,7 @@
 @section('content')
     <div class = "row">
         <div class="col-lg-12 mb-4">
-            <form action="" method="POST">
+            <form action="{{ route('type_activity.store') }}" method="POST">
                 @csrf
                 <div class="row form-group">
                     <div class="col-lg-12 mb-4">
@@ -22,5 +22,5 @@
                 </div>
             </form>
         </div>
-
+    </div>
 @endsection

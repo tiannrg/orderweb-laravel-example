@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Causal;
+use App\Models\Observation;
 use Illuminate\Http\Request;
 
-class CausalController extends Controller
+
+class ObservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $causals = Causal::all();
-        return view('causal.index', compact('causals'));
+        $observations = Observation::all();
+        return view('observation.index', compact('observations'));
     }
 
     /**
@@ -21,7 +22,7 @@ class CausalController extends Controller
      */
     public function create()
     {
-        return view('causal.create');
+        return view('observation.create');
     }
 
     /**
@@ -30,9 +31,9 @@ class CausalController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $causal = Causal::create($request->all());
-        session()->flash('message', 'registro creado exitosamente');
-        return redirect()->route('causal.index');
+        $observation = Observation::create($request->all());
+        session()->flash('message', 'observacion creada exitosamente');
+        return redirect()->route('observation.index');
     }
 
     /**
@@ -48,16 +49,15 @@ class CausalController extends Controller
      */
     public function edit(string $id)
     {
-        $causal = Causal::find($id);
-
-        if($causal)//la causal existe
+        $observation = Observation::find($id);
+        if($observation)//la observacion existe
         {
-            return view('causal.edit', compact('causal'));
+            return view('observation.edit', compact('observation'));
         }
         else
         {
             session()->flash('warning', 'No se encuentra el registro solicitado');
-            return redirect()->route('causal.index');
+            return redirect()->route('observation.index');
         }
     }
 
@@ -66,17 +66,17 @@ class CausalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $causal = Causal::find($id);
-        if($causal)//la causal existe
+        $observation = Observation::find($id);
+        if($observation)//la observacion existe
         {
-            $causal->update($request->all());
-            session()->flash('message', 'Registro actualizado exitosamente');
+            $observation->update($request->all());
+            session()->flash('message', 'Observacion actualizada exitosamente');
         }
         else
         {
             session()->flash('warning', 'No se encuentra el registro solicitado');
         }
-        return redirect()->route('causal.index');
+        return redirect()->route('observation.index');
     }
 
     /**
@@ -84,18 +84,18 @@ class CausalController extends Controller
      */
     public function destroy(string $id)
     {
-        $causal = Causal::find($id);
-        
-        if($causal)//la causal existe
+        $observation = Observation::find($id);
+        if($observation)//la observacion existe
         {
-            $causal->delete();
-            session()->flash('message', 'Registro eliminado exitosamente');
+            $observation->delete();
+            session()->flash('message', 'Observacion eliminada exitosamente');
         }
         else
         {
             session()->flash('warning', 'No se encuentra el registro solicitado');
         }
 
-        return redirect()->route('causal.index');
+        return redirect()->route('observation.index');
     }
 }
+

@@ -13,18 +13,18 @@ class Activity extends Model
     protected $fillable = [
         'description',
         'hours',
-        'tecnician_id',
-        'type_activity_id',
+        'technician_id',
+        'type_activity_id'
     ];
 
     public function technician()
     {
-    return $this->belongsTo(Technician::class, 'tecnician_id');
+        return $this->belongsTo(Technician::class, 'technician_id');
     }
 
     public function typeActivity()
     {
-    return $this->belongsTo(TypeActivity::class, 'type_activity_id');   
+        return $this->belongsTo(TypeActivity::class, 'type_activity_id');   
     }
 
     public function orders()

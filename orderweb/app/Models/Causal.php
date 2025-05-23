@@ -11,7 +11,7 @@ class Causal extends Model
     protected $table = 'causal';
 
     protected $fillable = [
-        'description',
+        'description'
     ];
 
     public function orders()

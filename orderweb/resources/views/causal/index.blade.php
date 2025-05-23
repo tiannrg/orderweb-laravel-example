@@ -1,6 +1,6 @@
 @extends('templates.base')
-@section('title', 'Crear causal')
-@section('header', 'Crear causal')
+@section('title', 'Causal')
+@section('header', 'Causal')
 @section('content')
     
     

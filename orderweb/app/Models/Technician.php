@@ -13,8 +13,8 @@ class Technician extends Model
     protected $fillable = [
         'document',
         'name',
-        'specialty',
-        'phone',
+        'speciality',
+        'phone'
     ];
 
     public function activities()

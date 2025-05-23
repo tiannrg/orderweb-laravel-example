@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_activity', function (Blueprint $table) {
+       Schema::create('order_activity', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->comment('ID de la orden');
-            $table->unsignedBigInteger('activity_id')->comment('ID de la actividad');
-
-            $table->unique(['order_id', 'activity_id']);
-            $table->foreign('order_id')->references('id')->on('order')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('activity_id')->references('id')->on('activity')
-                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained('order')
+                    ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('activity_id')->constrained('activity')
+                    ->onDelete('cascade')->onUpdate('cascade');
+            $table->unique(['order_id', 'activity_id']);        
             $table->timestamps();
         });
     }

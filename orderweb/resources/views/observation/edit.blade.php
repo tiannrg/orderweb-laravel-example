@@ -1,15 +1,17 @@
 @extends('templates.base')
-@section('title', 'Crear Observacion')
-@section('header', 'Crear Observacion')
+@section('title', 'Editar Observacion')
+@section('header', 'Editar Observacion')
 @section('content')
     <div class = "row">
         <div class="col-lg-12 mb-4">
-            <form action="" method="POST">
+            <form action="{{ route('observation.update', $observation['id']) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row form-group">
                     <div class="col-lg-12 mb-4">
                         <label for="description">Descripcion</label>
-                        <input type="text" class="form-control" name="description" id="description" required>
+                        <input type="text" class="form-control" name="description" id="description" required
+                         value="{{ $observation['description']}}">
                     </div>  
                 </div>
                 <div class="row">
@@ -22,5 +24,5 @@
                 </div>
             </form>
         </div>
-
+    </div>
 @endsection

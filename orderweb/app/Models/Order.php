@@ -11,10 +11,10 @@ class Order extends Model
     protected $table = 'order';
     protected $fillable = [
         'legalization_date',
-        'adress',
+        'address',
         'city',
         'observation_id',
-        'causal_id',
+        'causal_id'
     ];
 
     public function causal()
@@ -29,7 +29,7 @@ class Order extends Model
 
     public function activities()
     {
-        return $this->belongsToMany(OrderActivity::class);
+        return $this->belongsToMany(Activity::class);
         //return $this->belongsToMany(OrderActivity::class, 'order_activity', 'order_id', 'activity_id');
     }
 }

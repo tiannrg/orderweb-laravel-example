@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Causal;
+use App\Models\Technician;
 use Illuminate\Http\Request;
 
-class CausalController extends Controller
+class TechnicianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $causals = Causal::all();
-        return view('causal.index', compact('causals'));
+        $technicians = Technician::all();
+        return view('technician.index', compact('technicians'));
     }
 
     /**
@@ -21,7 +21,7 @@ class CausalController extends Controller
      */
     public function create()
     {
-        return view('causal.create');
+        return view('technician.create');
     }
 
     /**
@@ -29,10 +29,9 @@ class CausalController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-        $causal = Causal::create($request->all());
-        session()->flash('message', 'registro creado exitosamente');
-        return redirect()->route('causal.index');
+        $technician = Technician::create($request->all());
+        session()->flash('message', 'Registro creado exitosamente');
+        return redirect()->route('technician.index');
     }
 
     /**
@@ -48,17 +47,16 @@ class CausalController extends Controller
      */
     public function edit(string $id)
     {
-        $causal = Causal::find($id);
-
-        if($causal)//la causal existe
+        $technician = Technician::find($id);
+        if($technician) 
         {
-            return view('causal.edit', compact('causal'));
+            return view('technician.edit', compact('technician'));
         }
         else
         {
             session()->flash('warning', 'No se encuentra el registro solicitado');
-            return redirect()->route('causal.index');
-        }
+            return redirect()->route('technician.index');
+        }  
     }
 
     /**
@@ -66,17 +64,18 @@ class CausalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $causal = Causal::find($id);
-        if($causal)//la causal existe
+        $technician = Technician::find($id);
+        if($technician) 
         {
-            $causal->update($request->all());
+            $technician->update($request->all());
             session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning', 'No se encuentra el registro solicitado');
-        }
-        return redirect()->route('causal.index');
+            session()->flash('warning', 'No se encuentra el registro solicitado');            
+        } 
+
+        return redirect()->route('technician.index');
     }
 
     /**
@@ -84,18 +83,17 @@ class CausalController extends Controller
      */
     public function destroy(string $id)
     {
-        $causal = Causal::find($id);
-        
-        if($causal)//la causal existe
+        $technician = Technician::find($id);
+        if($technician) 
         {
-            $causal->delete();
+            $technician->delete();
             session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning', 'No se encuentra el registro solicitado');
-        }
+            session()->flash('warning', 'No se encuentra el registro solicitado');            
+        } 
 
-        return redirect()->route('causal.index');
+        return redirect()->route('technician.index');
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->date('legalizacion')->comment('Fecha de legalización');
-            $table->string('adress',50)->comment('Dirección');
+            $table->date('legalization_date')->comment('Fecha de legalización');
+            $table->string('address',50)->comment('Dirección');
             $table->string('city',80)->comment('Ciudad');
             $table->foreignId('causal_id')->constrained('causal')
                 ->onDelete('cascade');

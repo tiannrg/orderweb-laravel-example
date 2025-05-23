@@ -29,20 +29,20 @@ class DatabaseSeeder extends Seeder
 
         //crear 3 usuarios de rol super
         User:: factory(3)->create([
-            'role_id' => 2,
+            'role_id' => 2
         ]);
 
         //tecnicos
-        Technician:: factory(3)->create([
-            'speciality' => 'Instalacion de redes',
+        Technician:: factory(2)->create([
+            'speciality' => 'Instalacion de redes'
         ]);
 
         Technician:: factory(2)->create([
-            'speciality' => 'Construccion',
+            'speciality' => 'Construccion'
         ]);
 
         Technician:: factory(1)->create([
-            'speciality' => 'Lectura de resdes',
+            'speciality' => 'Lectura de resdes'
         ]);
 
         Technician:: factory(1)->create();  //tecnico sin especialidad
