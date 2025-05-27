@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\TypeActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class Type_ActivityController extends Controller
+class TypeActivityController extends Controller
 {
+    private $rules = [
+        'description' => 'required|string|min:3|max:100'
+    ];
+
+    private $traductionAttributes = [
+        'description' => 'descripción'
+    ];
+    
     /**
      * Display a listing of the resource.
      */
@@ -29,9 +38,17 @@ class Type_ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        $validator =  Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('type_activity.create')
+                            ->withInput()->withErrors($errors);
+        }
+        
         $type = TypeActivity::create($request->all());
-        session()->flash('message', 'Tipo de actividad creada exitosamente');
+        session()->flash('message', 'Registro creado exitosamente');
         return redirect()->route('type_activity.index');
     }
 
@@ -49,15 +66,15 @@ class Type_ActivityController extends Controller
     public function edit(string $id)
     {
         $type = TypeActivity::find($id);
-        if($type)//El tipo de actividad existe
+        if($type) 
         {
             return view('type_activity.edit', compact('type'));
         }
         else
         {
-            session()->flash('warning', 'No se encuentra el tipo de actividad solicitado');
+            session()->flash('warning', 'No se encuentra el registro solicitado');
             return redirect()->route('type_activity.index');
-        }
+        }  
     }
 
     /**
@@ -65,16 +82,26 @@ class Type_ActivityController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validator =  Validator::make($request->all(), $this->rules);
+        $validator->setAttributeNames($this->traductionAttributes);
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            return redirect()->route('type_activity.edit', $id)
+                            ->withInput()->withErrors($errors);
+        }
+        
         $type = TypeActivity::find($id);
-        if($type)//El tipo de actividad existe
+        if($type) 
         {
             $type->update($request->all());
-            session()->flash('message', 'Tipo de actividad actualizado exitosamente');
+            session()->flash('message', 'Registro actualizado exitosamente');
         }
         else
         {
-            session()->flash('warning', 'No se encuentra el tipo de actividad solicitado');
-        }
+            session()->flash('warning', 'No se encuentra el registro solicitado');            
+        } 
+
         return redirect()->route('type_activity.index');
     }
 
@@ -83,17 +110,16 @@ class Type_ActivityController extends Controller
      */
     public function destroy(string $id)
     {
-        $type= TypeActivity::find($id);
-
-        if($type)//El tipo de actividad existe
+        $type = TypeActivity::find($id);
+        if($type) 
         {
             $type->delete();
-            session()->flash('message', 'Tipo de actividad eliminado exitosamente');
+            session()->flash('message', 'Registro eliminado exitosamente');
         }
         else
         {
-            session()->flash('warning', 'No se encuentra el tipo de actividad solicitado');
-        }
+            session()->flash('warning', 'No se encuentra el registro solicitado');            
+        } 
 
         return redirect()->route('type_activity.index');
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\Type_ActivityController;
+use App\Http\Controllers\TypeActivityController;
 use App\Models\Observation;
 use Illuminate\Support\Facades\Route;
 
@@ -57,12 +58,12 @@ Route::prefix('observation')->group(function() {
 
 
 Route::prefix('type_activity')->group(function() {
-    Route::get('/index',[Type_ActivityController::class,'index'])->name('type_activity.index');
-    Route::get('/create',[Type_ActivityController::class,'create'])->name('type_activity.create');
-    Route::get('/edit/{id}',[Type_ActivityController::class,'edit'])->name('type_activity.edit');
-    Route::post('/store',[Type_ActivityController::class,'store'])->name('type_activity.store');
-    Route::put('/update/{id}',[Type_ActivityController::class,'update'])->name('type_activity.update');
-    Route::get('/destroy/{id}',[Type_ActivityController::class,'destroy'])->name('type_activity.destroy');
+    Route::get('/index',[TypeActivityController::class,'index'])->name('type_activity.index');
+    Route::get('/create',[TypeActivityController::class,'create'])->name('type_activity.create');
+    Route::get('/edit/{id}',[TypeActivityController::class,'edit'])->name('type_activity.edit');
+    Route::post('/store',[TypeActivityController::class,'store'])->name('type_activity.store');
+    Route::put('/update/{id}',[TypeActivityController::class,'update'])->name('type_activity.update');
+    Route::get('/destroy/{id}',[TypeActivityController::class,'destroy'])->name('type_activity.destroy');
 }); 
 
 
