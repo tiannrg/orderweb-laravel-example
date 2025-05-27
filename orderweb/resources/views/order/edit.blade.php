@@ -2,6 +2,7 @@
 @section('title', 'Editar órdenes')
 @section('header', 'Editar órdenes')
 @section('content')
+    @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4">
             <form action="{{ route('order.update', $order) }}" method="POST">
@@ -77,9 +78,73 @@
                             <div class="row form-group">
                                 <div class="col-lg-6">
                                     <label for="table_data">Actividades disponibles</label>
+                                    <table id= "table_data" class= "table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Descripción</th>
+                                                <th>Horas</th>
+                                                <th>Agregar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if(count($availableActivities) == 0 )
+                                                <tr>
+                                                    <td colspan="4">
+                                                        No existen actividades disponibles
+                                                    </td>
+                                                </tr>
+                                            @else
+                                                @foreach ($availableActivities as $activity)  
+                                                <tr>
+                                                    <td>{{ $activity->id }}</td>
+                                                    <td>{{ $activity->description }}</td>
+                                                    <td>{{ $activity->hours }}</td>
+                                                    <td>
+                                                        <a href="{{  route('order.add_activity', [$order['id'], $activity->id]) }}" class ="btn btn-success btn-circle btn-sm" title="Agregar actividad">
+                                                            <i class="fas fa-fw fa-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="table_data">Actividades agregadas</label>
+                                     <table id= "table_data" class= "table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Descripción</th>
+                                                <th>Horas</th>
+                                                <th>Retirar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             @if(count($addedActivities) == 0 )
+                                                <tr>
+                                                    <td colspan="4">
+                                                        No existen actividades agregadas
+                                                    </td>
+                                                </tr>
+                                            @else
+                                                @foreach ($addedActivities as $activity)  
+                                                <tr>
+                                                    <td>{{ $activity->id }}</td>
+                                                    <td>{{ $activity->description }}</td>
+                                                    <td>{{ $activity->hours }}</td>
+                                                    <td>
+                                                        <a href="{{  route('order.remove_activity', [$order['id'], $activity->id]) }}" class ="btn btn-danger btn-circle btn-sm" title="Retirar actividad">
+                                                            <i class="fas fa-fw fa-minus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
