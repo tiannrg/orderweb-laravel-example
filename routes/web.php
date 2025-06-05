@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\TypeActivityController;
 use Illuminate\Support\Facades\Route;
@@ -96,4 +97,9 @@ Route::middleware(['auth','can:admin-supervisor'])->prefix('order')->group(funct
     Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('/add_activity/{order_id}/{activity_id}', [OrderController::class, 'add_activity'])->name('order.add_activity');
     Route::get('/remove_activity/{order_id}/{activity_id}', [OrderController::class, 'remove_activity'])->name('order.remove_activity');
+});
+
+Route::middleware(['auth','can:administrador'])->prefix('reports')->group(function(){
+    Route::get('/index', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/export_technicians', [ReportController::class, 'export_technicians'])->name('reports.technicians');
 });
