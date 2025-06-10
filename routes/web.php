@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\ActivityController;
@@ -39,11 +38,11 @@ Route::prefix('auth')->group(function(){
     Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 });
 
-Route::middleware(['auth','can:admin-supervisor'])->prefix('auth')->group(function(){
+Route::middleware(['auth', 'can:admin-supervisor'])->prefix('auth')->group(function(){
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
-Route::middleware(['auth','can:administrador'])->prefix('causal')->group(function(){
+Route::middleware(['auth', 'can:administrador'])->prefix('causal')->group(function(){
     Route::get('/index', [CausalController::class, 'index'])->name('causal.index');
     Route::get('/create', [CausalController::class, 'create'])->name('causal.create');
     Route::get('/edit/{id}', [CausalController::class, 'edit'])->name('causal.edit');
@@ -61,7 +60,7 @@ Route::middleware(['auth', 'can:administrador'])->prefix('observation')->group(f
     Route::get('/destroy/{id}', [ObservationController::class, 'destroy'])->name('observation.destroy');
 });
 
-Route::middleware(['auth','can:administrador'])->prefix('type_activity')->group(function(){
+Route::middleware(['auth', 'can:administrador'])->prefix('type_activity')->group(function(){
     Route::get('/index', [TypeActivityController::class, 'index'])->name('type_activity.index');
     Route::get('/create', [TypeActivityController::class, 'create'])->name('type_activity.create');
     Route::get('/edit/{id}', [TypeActivityController::class, 'edit'])->name('type_activity.edit');
@@ -70,7 +69,7 @@ Route::middleware(['auth','can:administrador'])->prefix('type_activity')->group(
     Route::get('/destroy/{id}', [TypeActivityController::class, 'destroy'])->name('type_activity.destroy');
 });
 
-Route::middleware(['auth','can:supervisor'])->prefix('technician')->group(function(){
+Route::middleware(['auth', 'can:supervisor'])->prefix('technician')->group(function(){
     Route::get('/index', [TechnicianController::class, 'index'])->name('technician.index');
     Route::get('/create', [TechnicianController::class, 'create'])->name('technician.create');
     Route::get('/edit/{id}', [TechnicianController::class, 'edit'])->name('technician.edit');
@@ -79,7 +78,7 @@ Route::middleware(['auth','can:supervisor'])->prefix('technician')->group(functi
     Route::get('/destroy/{id}', [TechnicianController::class, 'destroy'])->name('technician.destroy');
 });
 
-Route::middleware(['auth','can:admin-supervisor'])->prefix('activity')->group(function(){
+Route::middleware(['auth', 'can:admin-supervisor'])->prefix('activity')->group(function(){
     Route::get('/index', [ActivityController::class, 'index'])->name('activity.index');
     Route::get('/create', [ActivityController::class, 'create'])->name('activity.create');
     Route::get('/edit/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
@@ -88,7 +87,7 @@ Route::middleware(['auth','can:admin-supervisor'])->prefix('activity')->group(fu
     Route::get('/destroy/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
 });
 
-Route::middleware(['auth','can:admin-supervisor'])->prefix('order')->group(function(){
+Route::middleware(['auth', 'can:admin-supervisor'])->prefix('order')->group(function(){
     Route::get('/index', [OrderController::class, 'index'])->name('order.index');
     Route::get('/create', [OrderController::class, 'create'])->name('order.create');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
@@ -99,7 +98,9 @@ Route::middleware(['auth','can:admin-supervisor'])->prefix('order')->group(funct
     Route::get('/remove_activity/{order_id}/{activity_id}', [OrderController::class, 'remove_activity'])->name('order.remove_activity');
 });
 
-Route::middleware(['auth','can:administrador'])->prefix('reports')->group(function(){
+Route::middleware(['auth', 'can:administrador'])->prefix('reports')->group(function(){
     Route::get('/index', [ReportController::class, 'index'])->name('reports.index');
     Route::get('/export_technicians', [ReportController::class, 'export_technicians'])->name('reports.technicians');
+    Route::post('/export_activities_by_technician', [ReportController::class, 'export_activities_by_technician'])
+                                                                            ->name('reports.activities_technician');
 });
