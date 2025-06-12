@@ -4,8 +4,8 @@
 @section('content')
     <section id="results">
         @if (count($orders) != 0)
-            <p><strong>Fecha de legalización desde: </strong>{{ $date1 }}</p>
-            <p><strong>Fecha de legalización hasta: </strong>{{ $date2 }}</p>
+            <p>Fecha de legalización desde:{{ $date1 }}</p>
+            <p><b>Fecha de legalización hasta: </b>{{ $date2 }}</p>
             <br>
             <table id="reportTable">
                 <thead>
